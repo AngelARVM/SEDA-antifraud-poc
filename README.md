@@ -54,8 +54,8 @@ sequenceDiagram
 
 ## Progress list
 - [x] API Gateway: HTTP endpoint `/transactions` validates payload and emits `transactions.incoming` with correlation and transaction IDs.
-- [ ] Normalizer Service: consume incoming events and standardize/enrich transaction payloads.
-- [ ] Rules Engine Service: apply deterministic business rules and flag violations.
+- [x] Normalizer Service: consume incoming events and standardize/enrich transaction payloads.
+- [x] Rules Engine Service: apply deterministic business rules and flag violations.
 - [ ] ML Scoring Service: generate fraud risk score from engineered features.
 - [ ] Decision Engine Service: merge rules + ML to produce final decision and expose status queries.
 - [ ] Audit Service: persist events/decisions to Postgres and expose an audit/activity feed.
