@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { DECISION } from './types/decision.enum';
+import { DecisionEnum } from './types/decision.enum';
 import { TOPICS } from '../../../libs/constants/topics';
 import { KAFKA_CONST } from '../../../libs/constants/constants';
 
@@ -23,10 +23,10 @@ export class DecisionEngineService implements OnModuleInit {
   decide(scored: any) {
     const score = Number(scored?.modelScore ?? 0);
 
-    let decision: DECISION;
-    if (score >= 70) decision = DECISION.REJECT;
-    else if (score >= 40) decision = DECISION.REVIEW;
-    else decision = DECISION.APPROVE;
+    let decision: DecisionEnum;
+    if (score >= 70) decision = DecisionEnum.REJECT;
+    else if (score >= 40) decision = DecisionEnum.REVIEW;
+    else decision = DecisionEnum.APPROVE;
 
     const result = {
       ...scored,

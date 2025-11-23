@@ -28,38 +28,38 @@
     },
     "decision-engine-service": {
       "type": "application",
-      "root": "apps/decision-engine-service",
+      "root": "apps/decision-engine",
       "entryFile": "main",
-      "sourceRoot": "apps/decision-engine-service/src",
+      "sourceRoot": "apps/decision-engine/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/decision-engine-service/tsconfig.app.json"
+        "tsConfigPath": "apps/decision-engine/tsconfig.app.json"
       }
     },
     "ml-scoring-service": {
       "type": "application",
-      "root": "apps/ml-scoring-service",
+      "root": "apps/ml-scoring",
       "entryFile": "main",
-      "sourceRoot": "apps/ml-scoring-service/src",
+      "sourceRoot": "apps/ml-scoring/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/ml-scoring-service/tsconfig.app.json"
+        "tsConfigPath": "apps/ml-scoring/tsconfig.app.json"
       }
     },
     "normalizer-service": {
       "type": "application",
-      "root": "apps/normalizer-service",
+      "root": "apps/normalizer",
       "entryFile": "main",
-      "sourceRoot": "apps/normalizer-service/src",
+      "sourceRoot": "apps/normalizer/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/normalizer-service/tsconfig.app.json"
+        "tsConfigPath": "apps/normalizer/tsconfig.app.json"
       }
     },
     "rules-engine-service": {
       "type": "application",
-      "root": "apps/rules-engine-service",
+      "root": "apps/rules-engine",
       "entryFile": "main",
-      "sourceRoot": "apps/rules-engine-service/src",
+      "sourceRoot": "apps/rules-engine/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/rules-engine-service/tsconfig.app.json"
+        "tsConfigPath": "apps/rules-engine/tsconfig.app.json"
       }
     }
   }
