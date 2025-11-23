@@ -1,0 +1,5 @@
+export enum DECISION {
+  APPROVE = 'APPROVE',
+  REJECT = 'REJECT',
+  REVIEW = 'REVIEW',
+}
