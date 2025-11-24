@@ -1,17 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/require-await */
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { TOPICS } from '../../../libs/constants/topics';
-import { KAFKA_CONST } from '../../../libs/constants/constants';
+import { KAFKA_NAME, TOPICS } from '../../../libs/constants';
 
 @Injectable()
 export class NormalizerServiceService implements OnModuleInit {
   private readonly logger = new Logger(NormalizerServiceService.name);
 
   constructor(
-    @Inject(KAFKA_CONST.name)
+    @Inject(KAFKA_NAME)
     private readonly kafkaClient: ClientKafka,
   ) {}
 
@@ -27,8 +23,7 @@ export class NormalizerServiceService implements OnModuleInit {
     }
   }
 
-  // Negocio: "normalizar" = asegurar tipos/formatos y agregar derivados útiles para antifraude.
-  async normalizeAndForward(raw: any) {
+  normalizeAndForward(raw: any) {
     const amountNum = Number(raw?.amount ?? 0);
 
     const normalized = {
@@ -39,7 +34,6 @@ export class NormalizerServiceService implements OnModuleInit {
       channel: String(raw?.channel ?? '').toUpperCase(),
       paymentMethod: String(raw?.paymentMethod ?? '').toUpperCase(),
 
-      // features derivadas rápidas
       isHighAmount: amountNum > 1000,
       amountBucket:
         amountNum < 100 ? 'LOW' : amountNum < 1000 ? 'MEDIUM' : 'HIGH',

@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { AuditServiceController } from './audit-service.controller';
 import { AuditService } from './audit-service.service';
 import { ConfigModule } from '@nestjs/config';
-import { ClientsModule, Transport } from '@nestjs/microservices';
+import { ClientsModule } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuditEventEntity } from './entities/audit-event.entity';
+import { KAFKA_NAME, kafkaClientOptions } from '../../../libs/constants';
 
 @Module({
   imports: [
@@ -22,16 +23,10 @@ import { AuditEventEntity } from './entities/audit-event.entity';
       }),
     }),
     TypeOrmModule.forFeature([AuditEventEntity]),
-    ClientsModule.register([
+    ClientsModule.registerAsync([
       {
-        name: 'KAFKA_ANTIFRAUD',
-        transport: Transport.KAFKA,
-        options: {
-          client: {
-            clientId: 'audit-service-producer-client',
-            brokers: [process.env.KAFKA_BROKER || 'kafka:9092'],
-          },
-        },
+        name: KAFKA_NAME,
+        useFactory: () => kafkaClientOptions('audit'),
       },
     ]),
   ],

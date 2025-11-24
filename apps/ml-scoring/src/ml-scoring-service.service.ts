@@ -1,17 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
-import { TOPICS } from '../../../libs/constants/topics';
-import { KAFKA_CONST } from '../../../libs/constants/constants';
+import { KAFKA_NAME, TOPICS } from '../../../libs/constants';
 
 @Injectable()
 export class MlScoringService implements OnModuleInit {
   private logger = new Logger(MlScoringService.name);
 
   constructor(
-    @Inject(KAFKA_CONST.name)
+    @Inject(KAFKA_NAME)
     private readonly kafka: ClientKafka,
   ) {}
 
@@ -61,6 +60,6 @@ export class MlScoringService implements OnModuleInit {
       `ML scored tx=${out.transactionId} corrId=${out.correlationId} modelScore=${modelScore}`,
     );
 
-    this.kafka.emit(TOPICS.scored, out);
+    this.kafka.emit(TOPICS.mlScored, out);
   }
 }

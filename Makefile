@@ -20,11 +20,15 @@ context:
 	} | sort | uniq | grep -vE "package-lock.json|yarn.lock" | while read filepath; do \
 		echo "  -> Procesando: $$filepath"; \
 		echo "<file path=\"$$filepath\">" >> $(OUT_FILE); \
-		sed '/^\s*\/\//d' "$$filepath" | sed '/^\s*$$/d' | sed 's/[ \t]*$$//' >> $(OUT_FILE); \
+		sed '/^[[:blank:]]*\/\//d' "$$filepath" \
+		| sed '/^[[:blank:]]*$$/d' \
+		| sed 's/[[:blank:]]*$$//' \
+		>> $(OUT_FILE); \
 		echo "</file>" >> $(OUT_FILE); \
 	done
 	@echo "</project_context>" >> $(OUT_FILE)
 	@echo "✅ Archivo generado: $(OUT_FILE) (Optimizado y sin archivos ignorados)"
+
 
 clean:
 	@rm -f $(OUT_FILE)

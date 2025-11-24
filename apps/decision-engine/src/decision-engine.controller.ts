@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import { Controller } from '@nestjs/common';
 import { DecisionEngineService } from './decision-engine.service';
 import { EventPattern, Payload } from '@nestjs/microservices';
@@ -12,7 +12,7 @@ export class DecisionEngineServiceController {
     private readonly decisionEngineServiceService: DecisionEngineService,
   ) {}
 
-  @EventPattern(TOPICS.scored)
+  @EventPattern(TOPICS.mlScored)
   async onScored(@Payload() message: any) {
     const event = message?.event ?? message;
 

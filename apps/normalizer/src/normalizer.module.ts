@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { NormalizerServiceController } from './normalizer.controller';
 import { NormalizerServiceService } from './normalizer.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { KAFKA_CONST } from '../../../libs/constants/constants';
+import { ClientsModule } from '@nestjs/microservices';
+import { KAFKA_NAME, kafkaClientOptions } from '../../../libs/constants';
 
 @Module({
   imports: [
@@ -12,17 +12,10 @@ import { KAFKA_CONST } from '../../../libs/constants/constants';
     }),
     ClientsModule.registerAsync([
       {
-        name: KAFKA_CONST.name,
+        name: KAFKA_NAME,
         inject: [ConfigService],
-        useFactory: (config: ConfigService) => ({
-          transport: Transport.KAFKA,
-          options: {
-            client: {
-              clientId: 'normailizer-producer-client',
-              brokers: [config.get<string>('KAFKA_BROKER') || 'kafka:9092'],
-            },
-          },
-        }),
+        useFactory: (config: ConfigService) =>
+          kafkaClientOptions('normalizer', config),
       },
     ]),
   ],

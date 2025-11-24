@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { TOPICS } from '../../../libs/constants/topics';
-import { KAFKA_CONST } from '../../../libs/constants/constants';
+import { KAFKA_NAME } from '../../../libs/constants';
 
 export const HIGH_RISK_COUNTRIES = [
   'KP', // North Korea (FATF Blacklist)
@@ -28,7 +26,7 @@ export class RulesEngineService implements OnModuleInit {
   private readonly logger = new Logger(RulesEngineService.name);
 
   constructor(
-    @Inject(KAFKA_CONST.name)
+    @Inject(KAFKA_NAME)
     private readonly kafka: ClientKafka,
   ) {}
 

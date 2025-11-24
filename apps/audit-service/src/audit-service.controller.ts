@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-// apps/audit-service/src/audit-service.controller.ts
 import { Controller, Logger } from '@nestjs/common';
 import { AuditService } from './audit-service.service';
 import { EventPattern, Payload } from '@nestjs/microservices';

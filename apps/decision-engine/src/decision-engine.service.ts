@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientKafka } from '@nestjs/microservices';
 import { DecisionEnum } from './types/decision.enum';
 import { TOPICS } from '../../../libs/constants/topics';
-import { KAFKA_CONST } from '../../../libs/constants/constants';
+import { KAFKA_NAME } from '../../../libs/constants';
 
 @Injectable()
 export class DecisionEngineService implements OnModuleInit {
   private readonly logger = new Logger(DecisionEngineService.name);
   constructor(
-    @Inject(KAFKA_CONST.name)
+    @Inject(KAFKA_NAME)
     private readonly kafka: ClientKafka,
   ) {}
 
